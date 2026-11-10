@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/cyhkelvin/quizkit/schema/progress.schema.json",
+  "title": "quizkit 進度檔",
+  "type": "object",
+  "required": ["format", "user", "banks"],
+  "properties": {
+    "format": { "const": "quizkit-progress/1" },
+    "user": { "type": "string", "minLength": 1 },
+    "exportedAt": { "type": "string" },
+    "source": { "type": "string" },
+    "banks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "bankVersion": { "type": "string" },
+          "attempts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["mode", "correct", "total", "score", "at"],
+              "properties": {
+                "mode": { "enum": ["quick", "full", "wrong", "domain"] },
+                "domain": { "type": "integer", "minimum": 1 },
+                "correct": { "type": "integer", "minimum": 0 },
+                "total": { "type": "integer", "minimum": 0 },
+                "score": { "type": "number" },
+                "at": { "type": "number" },
+                "durationSec": { "type": "number" }
+              }
+            }
+          },
+          "lastResult": {
+            "type": "object",
+            "propertyNames": { "pattern": "^[0-9]+$" },
+            "additionalProperties": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": [{ "enum": [0, 1] }, { "type": "number" }]
+            }
+          }
+        }
+      }
+    }
+  }
+}

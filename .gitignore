@@ -1,0 +1,9 @@
+node_modules/
+dist/
+banks/private-*/
+.DS_Store
+# 舊版 artifact 與私人資料，只保留說明
+legacy/*
+!legacy/README.md
+# 交接文件與 issue 草稿，只留在本機
+docs/

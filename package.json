@@ -1,0 +1,33 @@
+{
+  "name": "quizkit",
+  "version": "0.1.0",
+  "description": "把題庫 JSON 變成手機也能用的刷題網頁",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "quizkit": "cli/index.js"
+  },
+  "files": [
+    "app",
+    "cli",
+    "schema"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "validate": "node cli/index.js validate banks/",
+    "build": "node cli/index.js build --banks banks/ --out dist/portal.html"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyhkelvin/quizkit.git"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "esbuild": "^0.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

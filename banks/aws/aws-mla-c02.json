@@ -1,0 +1,879 @@
+{
+  "id": "aws-mla-c02",
+  "group": "AWS",
+  "section": "AWS 認證・原創模擬題",
+  "title": "Machine Learning Engineer – Associate（MLA-C02）",
+  "subtitle": "MLA-C02・助理級",
+  "code": "MLA-C02",
+  "version": "2026.11.1",
+  "minutes": 130,
+  "passPercent": 72,
+  "shuffleFull": true,
+  "domains": [
+    "ML 與 AI 的資料準備",
+    "ML 模型與基礎模型開發",
+    "ML 與 AI 工作流程的部署與編排",
+    "ML 與 AI 解決方案的維運、監控與安全"
+  ],
+  "source": "原創模擬題：依 AWS 官方 exam guide 的題數、題型與領域配分撰寫，非 AWS 官方題目，也未參考任何外流真題。AWS 實際以 100–1000 量表計分，這裡以答對百分比近似。",
+  "note": "依 MLA-C02 領域配分出題；以正式版 associate 規格 65 題、130 分鐘計時（C02 beta 為 85 題、170 分鐘，正式版規格以 AWS 公告為準）",
+  "questions": [
+    {
+      "n": 1,
+      "domain": 1,
+      "q": "一個 ML 團隊的訓練資料是數 TB 的 CSV 檔，存放在 S3。訓練作業每次都要讀取全部資料，但只用到 10 個欄位中的 3 個，讀取很慢。最有效的改善方式是？",
+      "options": [
+        "把資料轉成 Apache Parquet 欄式格式",
+        "把資料改存成 JSON",
+        "把檔案壓縮成單一 ZIP",
+        "把資料搬到 EBS"
+      ],
+      "answer": 0,
+      "explanation": "Parquet 是欄式格式，只讀需要的欄位並有良好壓縮，可大幅減少 I/O，Athena、Glue、Spark 和 SageMaker 都支援。"
+    },
+    {
+      "n": 2,
+      "domain": 1,
+      "q": "資料科學家希望用視覺化介面探索資料、處理缺失值、編碼類別欄位，並把流程匯出成可重複執行的處理作業，盡量少寫程式。應使用？",
+      "options": [
+        "Amazon SageMaker Data Wrangler（SageMaker Canvas 中的資料準備）",
+        "Amazon SageMaker Ground Truth",
+        "AWS CloudFormation",
+        "Amazon SageMaker Model Monitor"
+      ],
+      "answer": 0,
+      "explanation": "Data Wrangler 提供大量內建轉換與資料品質洞察，可匯出成 processing job 或 pipeline 步驟。Ground Truth 用於標註；Model Monitor 監控上線模型。"
+    },
+    {
+      "n": 3,
+      "domain": 1,
+      "q": "一個資料集有「城市」欄位，共 5 個不同值，彼此沒有大小順序。要給線性模型使用，最適合的編碼方式是？",
+      "options": [
+        "One-hot encoding",
+        "Label encoding 成 1 到 5",
+        "直接刪除欄位",
+        "Min-max 正規化"
+      ],
+      "answer": 0,
+      "explanation": "無序類別用 one-hot 編碼，避免模型誤以為類別間有大小關係。Label encoding 適合有順序的類別，或樹模型。"
+    },
+    {
+      "n": 4,
+      "domain": 1,
+      "q": "一個欄位的數值範圍從 0 到 1,000,000，另一個欄位在 0 到 1 之間。使用 k-NN 或梯度下降訓練前，應先做什麼？",
+      "options": [
+        "特徵縮放（標準化或正規化）",
+        "One-hot encoding",
+        "移除所有數值欄位",
+        "增加更多類別欄位"
+      ],
+      "answer": 0,
+      "explanation": "距離型與梯度下降型演算法對尺度敏感，大範圍特徵會主導結果。標準化（z-score）或 min-max 正規化可讓特徵尺度一致。"
+    },
+    {
+      "n": 5,
+      "domain": 1,
+      "q": "一個詐欺偵測資料集中只有 0.5% 是詐欺樣本。下列哪些方法可以處理類別不平衡？（選 2 個）",
+      "options": [
+        "對少數類別做過取樣，例如 SMOTE",
+        "在訓練時調整類別權重",
+        "把多數類別全部刪除",
+        "只用 accuracy 評估",
+        "把詐欺樣本改標成正常"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "explanation": "過取樣少數類別（如 SMOTE）、欠取樣多數類別，或給少數類別較高權重，都能緩解不平衡。評估時應看 recall、precision、F1、PR-AUC，而不是只看 accuracy。"
+    },
+    {
+      "n": 6,
+      "domain": 1,
+      "q": "一家公司需要大量影像的邊界框標註，希望結合人工標註員與自動標註以降低成本。應使用？",
+      "options": [
+        "Amazon SageMaker Ground Truth",
+        "Amazon Rekognition Custom Labels 推論端點",
+        "AWS Glue",
+        "Amazon Textract"
+      ],
+      "answer": 0,
+      "explanation": "Ground Truth 提供標註工作流程，可使用私有團隊、廠商或公開人力，並支援自動標註（active learning）降低成本。"
+    },
+    {
+      "n": 7,
+      "domain": 1,
+      "q": "團隊發現模型在驗證集上表現極好，上線後卻很差。調查後發現某個特徵是「事件發生後」才會產生的資訊。這屬於什麼問題？",
+      "options": [
+        "資料洩漏（data leakage）",
+        "欠擬合",
+        "梯度爆炸",
+        "類別不平衡"
+      ],
+      "answer": 0,
+      "explanation": "訓練時用到推論當下拿不到的資訊（例如目標的事後結果），會造成資料洩漏，讓離線評估過度樂觀。應移除該特徵，並依時間正確切分資料。"
+    },
+    {
+      "n": 8,
+      "domain": 1,
+      "q": "一個時間序列預測模型的資料集，應該如何切分訓練集和測試集？",
+      "options": [
+        "依時間切分：較早的資料做訓練，較新的資料做測試",
+        "完全隨機打散後切分",
+        "依資料列編號的奇偶數切分",
+        "把測試集也加入訓練"
+      ],
+      "answer": 0,
+      "explanation": "時間序列要依時間切分，避免用未來資料預測過去，造成資料洩漏和過度樂觀的評估。"
+    },
+    {
+      "n": 9,
+      "domain": 1,
+      "q": "一個團隊要讓多個模型共用經過工程處理的特徵，並在線上推論時以低延遲取得最新特徵值。應使用？",
+      "options": [
+        "Amazon SageMaker Feature Store 的線上儲存",
+        "Amazon S3 Glacier",
+        "Amazon Redshift 叢集直接查詢",
+        "Amazon EFS"
+      ],
+      "answer": 0,
+      "explanation": "Feature Store 線上儲存提供低延遲讀取最新特徵，離線儲存保存歷史紀錄供訓練，可確保訓練與推論特徵一致。"
+    },
+    {
+      "n": 10,
+      "domain": 1,
+      "q": "資料工程師需要定期從多個來源擷取資料、轉換後寫入 S3 資料湖，並自動探索資料結構建立資料目錄。應使用？",
+      "options": [
+        "AWS Glue（ETL 作業與爬蟲程式）",
+        "Amazon SageMaker Clarify",
+        "Amazon CloudFront",
+        "AWS Shield"
+      ],
+      "answer": 0,
+      "explanation": "AWS Glue 提供無伺服器 ETL、Crawler 自動推斷結構並寫入 Data Catalog，供 Athena、SageMaker 等使用。"
+    },
+    {
+      "n": 11,
+      "domain": 1,
+      "q": "要在訓練前檢查資料集中不同族群（例如性別）的標籤比例是否不平衡，應使用哪個工具？",
+      "options": [
+        "SageMaker Clarify 的訓練前偏差指標（例如 Class Imbalance、DPL）",
+        "SageMaker Debugger",
+        "Amazon CloudWatch",
+        "AWS X-Ray"
+      ],
+      "answer": 0,
+      "explanation": "Clarify 可計算訓練前的資料偏差指標（類別不平衡、標籤比例差異等），以及訓練後的模型偏差和特徵歸因。"
+    },
+    {
+      "n": 12,
+      "domain": 1,
+      "q": "一個欄位有 15% 缺失值，而且缺失與目標無明顯關聯。在不想丟掉太多資料的情況下，常見的處理方式是？",
+      "options": [
+        "以中位數或平均數插補，並可加一個「是否缺失」的指標欄位",
+        "直接刪除所有含缺失值的資料列",
+        "用 0 取代所有缺失值且不做任何紀錄",
+        "刪除目標欄位"
+      ],
+      "answer": 0,
+      "explanation": "插補（中位數、平均數、眾數，或模型插補）可保留資料量，加上缺失指標欄位讓模型知道哪些值是補的。"
+    },
+    {
+      "n": 13,
+      "domain": 1,
+      "q": "一家公司需要即時把網站點擊事件串流進來，並做簡單的轉換後寫入 S3，供之後訓練模型。最少維運的方案是？",
+      "options": [
+        "Amazon Data Firehose",
+        "在 EC2 上自建 Kafka 叢集",
+        "每天手動上傳 CSV",
+        "Amazon SQS 加上手寫消費者寫 S3"
+      ],
+      "answer": 0,
+      "explanation": "Data Firehose 是全託管串流交付服務，可緩衝、選擇性用 Lambda 轉換、轉成 Parquet，再寫入 S3，不需管理基礎設施。"
+    },
+    {
+      "n": 14,
+      "domain": 1,
+      "q": "一個文字分類模型要處理客戶評論。在建立特徵前，下列哪一項是常見的前處理步驟？",
+      "options": [
+        "斷詞（tokenization）並移除多餘雜訊",
+        "把文字轉成圖片",
+        "對文字做 one-hot 編碼成單一欄位",
+        "把所有評論合併成一篇"
+      ],
+      "answer": 0,
+      "explanation": "文字前處理通常包括斷詞、正規化大小寫、移除雜訊，再轉成 TF-IDF、embedding 等數值特徵。"
+    },
+    {
+      "n": 15,
+      "domain": 1,
+      "q": "資料集中有一些極端離群值，會嚴重影響線性迴歸模型。下列哪個做法較合理？",
+      "options": [
+        "先調查離群值原因；若為錯誤資料則移除，否則可考慮截尾（clipping）或對數轉換",
+        "一律保留不處理",
+        "把所有數值乘以 100",
+        "刪除目標欄位"
+      ],
+      "answer": 0,
+      "explanation": "離群值可能是錯誤，也可能是真實的重要事件，應先調查。處理方式包括移除錯誤值、截尾、對數轉換或改用較穩健的模型。"
+    },
+    {
+      "n": 16,
+      "domain": 1,
+      "q": "訓練資料含有個資，公司要求資料科學家只能存取去識別化後的資料。下列哪個做法最適合？",
+      "options": [
+        "在資料準備流程中遮罩或雜湊個資欄位，並用 IAM 與 Lake Formation 控制原始資料存取",
+        "把原始資料複製到每位資料科學家的筆電",
+        "把個資欄位改名",
+        "把 S3 儲存貯體公開"
+      ],
+      "answer": 0,
+      "explanation": "資料最小化與存取控制：處理流程中遮罩、雜湊或代碼化敏感欄位，並以 IAM、Lake Formation 細粒度權限限制原始資料存取。"
+    },
+    {
+      "n": 17,
+      "domain": 1,
+      "q": "要為一個 RAG 應用準備知識庫資料，下列哪一個步驟最直接影響檢索品質？",
+      "options": [
+        "選擇合適的切塊（chunking）策略與 embedding 模型",
+        "把文件轉成圖片",
+        "增加 S3 儲存類別數量",
+        "關閉 metadata"
+      ],
+      "answer": 0,
+      "explanation": "切塊大小、重疊、是否依語意或結構切分，以及 embedding 模型的選擇，都會直接影響檢索到的內容是否相關。加上 metadata 也能協助過濾。"
+    },
+    {
+      "n": 18,
+      "domain": 1,
+      "q": "資料科學團隊需要可重現的實驗：知道每個模型用了哪一版資料。下列哪個做法最合適？",
+      "options": [
+        "把資料集版本化（例如 S3 版本控制或依日期分區），並在實驗追蹤中記錄資料位置與版本",
+        "每次直接覆寫同一個檔案",
+        "只保留最新資料",
+        "把資料存在本機"
+      ],
+      "answer": 0,
+      "explanation": "資料版本化加上實驗追蹤（例如 SageMaker 搭配 MLflow、Lineage Tracking），可重現模型、追查問題。"
+    },
+    {
+      "n": 19,
+      "domain": 2,
+      "q": "一家公司要預測客戶是否會流失，資料是結構化表格，約 50 萬列、40 個特徵。下列哪個演算法最適合作為強基準？",
+      "options": [
+        "XGBoost（梯度提升樹）",
+        "卷積神經網路",
+        "K-means",
+        "主成分分析"
+      ],
+      "answer": 0,
+      "explanation": "梯度提升樹（XGBoost、LightGBM）在表格分類問題上通常表現出色、訓練快，且不太需要特徵縮放。CNN 適合影像；K-means、PCA 不是分類器。"
+    },
+    {
+      "n": 20,
+      "domain": 2,
+      "q": "要自動找出 XGBoost 模型的最佳超參數（例如 max_depth、eta），並希望比網格搜尋更有效率。應使用？",
+      "options": [
+        "SageMaker 自動模型調校，使用貝氏最佳化",
+        "手動逐一嘗試",
+        "只用預設值",
+        "增加訓練資料"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker Automatic Model Tuning 支援貝氏最佳化、隨機搜尋、Hyperband 等策略，會依先前結果選擇下一組超參數，通常比網格搜尋有效率。"
+    },
+    {
+      "n": 21,
+      "domain": 2,
+      "q": "訓練深度學習模型時，訓練損失持續下降，驗證損失在第 10 個 epoch 後開始上升。最直接的做法是？",
+      "options": [
+        "使用提早停止（early stopping），並保留驗證損失最低時的模型",
+        "繼續訓練到 100 個 epoch",
+        "提高學習率",
+        "移除驗證集"
+      ],
+      "answer": 0,
+      "explanation": "驗證損失開始上升代表過擬合。提早停止可在泛化最好時停下；也可加入正則化、dropout、資料增強。"
+    },
+    {
+      "n": 22,
+      "domain": 2,
+      "q": "一個二元分類模型用於篩檢癌症，漏判（偽陰性）的代價遠高於誤判。應優先優化哪個指標，並如何調整？",
+      "options": [
+        "提高 recall，可降低分類門檻",
+        "提高 precision，可提高分類門檻",
+        "只看 accuracy",
+        "只看訓練時間"
+      ],
+      "answer": 0,
+      "explanation": "偽陰性代價高時要提高 recall（找出更多真陽性）。降低決策門檻會讓更多樣本被判為陽性，recall 上升、precision 通常下降。"
+    },
+    {
+      "n": 23,
+      "domain": 2,
+      "q": "一家公司的影像分類資料只有幾千張標註圖片。要快速得到不錯的模型，最有效的方法是？",
+      "options": [
+        "使用預訓練模型做遷移學習（transfer learning）並微調",
+        "從頭訓練一個大型 CNN",
+        "改用 K-means",
+        "只用線性迴歸"
+      ],
+      "answer": 0,
+      "explanation": "遷移學習利用在大型資料集上預訓練的模型特徵，只需少量資料微調，就能得到好結果，訓練成本也低。"
+    },
+    {
+      "n": 24,
+      "domain": 2,
+      "q": "大型模型的分散式訓練中，發現 GPU 使用率很低，大部分時間在等資料載入。下列哪個做法最可能改善？",
+      "options": [
+        "使用 Pipe 模式或 FastFile 模式串流資料、增加資料載入的平行度",
+        "換成更大的 GPU",
+        "降低批次大小",
+        "關閉資料預取"
+      ],
+      "answer": 0,
+      "explanation": "I/O 瓶頸時應改善資料管線：串流輸入（Pipe/FastFile）、多工作者資料載入、預取、使用欄式或 RecordIO 格式。換更大的 GPU 不解決 I/O 問題。"
+    },
+    {
+      "n": 25,
+      "domain": 2,
+      "q": "要在訓練過程中自動偵測梯度消失、損失不下降等問題，並取得系統資源使用分析，應使用？",
+      "options": [
+        "Amazon SageMaker Debugger",
+        "Amazon SageMaker Ground Truth",
+        "AWS Glue DataBrew",
+        "Amazon Macie"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker Debugger 在訓練中擷取張量並套用內建規則（梯度消失、過擬合等），也提供 GPU/CPU 使用率分析。"
+    },
+    {
+      "n": 26,
+      "domain": 2,
+      "q": "一家公司要比較多次實驗的超參數、指標和產出模型，並集中管理實驗紀錄。在 SageMaker 中可使用？",
+      "options": [
+        "SageMaker 上的 MLflow（實驗追蹤）",
+        "Amazon Route 53",
+        "AWS Snowball",
+        "Amazon SNS"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 提供託管的 MLflow，用來追蹤實驗參數、指標、成品並註冊模型。"
+    },
+    {
+      "n": 27,
+      "domain": 2,
+      "q": "一個訓練作業很長且可以從檢查點恢復，公司想降低訓練成本。應怎麼做？",
+      "options": [
+        "使用 Managed Spot Training 並設定檢查點到 S3",
+        "使用最大的隨需 GPU 執行個體",
+        "關閉檢查點",
+        "在本機筆電訓練"
+      ],
+      "answer": 0,
+      "explanation": "Managed Spot Training 使用 Spot 容量，可省下最多約 90% 成本；搭配檢查點，被中斷時可從檢查點繼續。"
+    },
+    {
+      "n": 28,
+      "domain": 2,
+      "q": "一家公司要把通用 LLM 調整成能以公司固定格式回答保險條款問題，並有上千筆標註的問答資料。在 Amazon Bedrock 中應使用？",
+      "options": [
+        "模型客製化中的微調（fine-tuning）",
+        "Provisioned Throughput 但不訓練",
+        "只調高 temperature",
+        "Bedrock Guardrails"
+      ],
+      "answer": 0,
+      "explanation": "有標註的「提示-回應」資料時，用 Bedrock 的微調讓模型學會特定任務與格式。注意：使用客製化模型推論需要 Provisioned Throughput 或 Bedrock 支援的隨需部署方式。"
+    },
+    {
+      "n": 29,
+      "domain": 2,
+      "q": "一家公司要評估 RAG 應用的回答品質，包括答案是否忠於檢索內容、是否回答了問題。下列哪些是適合的評估面向？（選 2 個）",
+      "options": [
+        "忠實度（faithfulness / groundedness）",
+        "答案相關性（answer relevance）",
+        "模型檔案大小",
+        "GPU 溫度",
+        "S3 儲存類別"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "explanation": "RAG 評估常看檢索品質（context relevance、recall）與生成品質（faithfulness、answer relevance、正確性）。Bedrock 的評估功能也支援 RAG 評估。"
+    },
+    {
+      "n": 30,
+      "domain": 2,
+      "q": "一個多類別分類模型的表現需要細看每個類別被誤判成哪一類。應查看？",
+      "options": [
+        "混淆矩陣（confusion matrix）",
+        "RMSE",
+        "R²",
+        "學習率曲線"
+      ],
+      "answer": 0,
+      "explanation": "混淆矩陣顯示每個實際類別被預測成哪些類別，可看出模型在哪些類別間容易混淆。"
+    },
+    {
+      "n": 31,
+      "domain": 2,
+      "q": "一家公司需要在模型訓練完成後保存模型版本、記錄評估指標，並在上線前經過核准流程。應使用？",
+      "options": [
+        "SageMaker Model Registry",
+        "Amazon S3 Glacier",
+        "AWS Lambda 層",
+        "Amazon ECR 公開儲存庫"
+      ],
+      "answer": 0,
+      "explanation": "Model Registry 管理模型版本、metadata 與核准狀態，可串接 CI/CD，只部署已核准的版本。"
+    },
+    {
+      "n": 32,
+      "domain": 2,
+      "q": "一個推薦模型的資料特徵數量很多，且很多特徵高度相關，造成訓練慢又容易過擬合。可以考慮哪個方法？",
+      "options": [
+        "使用主成分分析（PCA）降維或做特徵選擇",
+        "增加更多相關特徵",
+        "移除目標欄位",
+        "提高學習率"
+      ],
+      "answer": 0,
+      "explanation": "PCA 把相關特徵轉成較少的不相關主成分；也可用特徵選擇移除冗餘特徵，降低過擬合和訓練成本。"
+    },
+    {
+      "n": 33,
+      "domain": 2,
+      "q": "想用最少的 ML 專業知識，自動為表格資料嘗試多種演算法與超參數，並取得排行榜和可解釋性報告。應使用？",
+      "options": [
+        "SageMaker Autopilot（Canvas 中的 AutoML）",
+        "從頭撰寫 PyTorch 訓練腳本",
+        "Amazon Kendra",
+        "AWS Step Functions"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker Autopilot 自動完成資料處理、演算法選擇和調參，提供候選模型排行榜和可解釋性報告。"
+    },
+    {
+      "n": 34,
+      "domain": 2,
+      "q": "一家公司要在 Bedrock 上選擇基礎模型。在合規需求下，資料不能離開特定區域。選擇模型時應先確認什麼？",
+      "options": [
+        "該模型在目標區域是否可用，以及是否需要跨區域推論",
+        "模型名稱是否容易記",
+        "模型的 logo",
+        "模型是否支援 IPv6"
+      ],
+      "answer": 0,
+      "explanation": "Bedrock 模型的可用性依區域而異；跨區域推論設定檔可能把請求路由到其他區域，有資料駐留要求時要確認模型在目標區域可用並謹慎使用跨區域推論。"
+    },
+    {
+      "n": 35,
+      "domain": 3,
+      "q": "一個模型要提供給網站即時呼叫，延遲需在 100 毫秒內，流量穩定。應使用哪種 SageMaker 推論選項？",
+      "options": [
+        "即時推論端點（real-time endpoint）",
+        "批次轉換",
+        "非同步推論",
+        "在 S3 存放預測結果"
+      ],
+      "answer": 0,
+      "explanation": "需要低延遲、同步回應時使用即時端點，並可設定自動擴展。批次轉換適合離線大量資料；非同步推論適合大型輸入與長處理時間。"
+    },
+    {
+      "n": 36,
+      "domain": 3,
+      "q": "一個模型的請求流量很零星（偶爾一天只有幾次），可以接受偶爾的冷啟動延遲，希望閒置時不付費。應使用？",
+      "options": [
+        "SageMaker 無伺服器推論（Serverless Inference）",
+        "常駐的即時端點",
+        "批次轉換",
+        "在 EC2 全天運行"
+      ],
+      "answer": 0,
+      "explanation": "Serverless Inference 依請求自動擴展，閒置時縮到零、不計運算費用，適合流量零星且可接受冷啟動的情境。"
+    },
+    {
+      "n": 37,
+      "domain": 3,
+      "q": "一個文件分析模型每次請求的輸入檔案可達 1 GB，處理時間約 10 分鐘，使用者可以稍後再取結果。應使用？",
+      "options": [
+        "SageMaker 非同步推論（Asynchronous Inference）",
+        "即時端點",
+        "無伺服器推論",
+        "Lambda 同步呼叫"
+      ],
+      "answer": 0,
+      "explanation": "非同步推論支援大型輸入（最高約 1 GB）和長處理時間（最長約 1 小時），請求排入佇列、結果寫到 S3，閒置時可縮到零。"
+    },
+    {
+      "n": 38,
+      "domain": 3,
+      "q": "一家公司有上百個小型模型（每位客戶一個），流量都不大，想降低端點成本。應使用？",
+      "options": [
+        "多模型端點（multi-model endpoint）",
+        "每個模型各自部署一個即時端點",
+        "批次轉換",
+        "每個模型一個 EC2"
+      ],
+      "answer": 0,
+      "explanation": "多模型端點讓多個模型共用同一組運算資源，依需求動態載入模型，適合大量、低流量的同類模型。"
+    },
+    {
+      "n": 39,
+      "domain": 3,
+      "q": "要把新版本模型上線，但想先讓 10% 流量導到新版本觀察，有問題再自動回滾。應使用？",
+      "options": [
+        "SageMaker 部署護欄的金絲雀（canary）流量轉移，搭配 CloudWatch 警示自動回滾",
+        "直接取代舊端點",
+        "建立兩個獨立網站",
+        "每天手動切換"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker deployment guardrails 支援藍綠部署中的 canary、線性流量轉移，並在警示觸發時自動回滾。"
+    },
+    {
+      "n": 40,
+      "domain": 3,
+      "q": "要在正式切換前，用真實線上流量測試新模型，但新模型的預測不回傳給使用者。應使用？",
+      "options": [
+        "影子測試（shadow testing / shadow variant）",
+        "A/B 測試把結果回傳給使用者",
+        "批次轉換",
+        "刪除舊模型"
+      ],
+      "answer": 0,
+      "explanation": "影子測試把線上請求複製給影子變體，比較效能與預測，但只回傳生產變體的結果，不影響使用者。"
+    },
+    {
+      "n": 41,
+      "domain": 3,
+      "q": "一家公司要建立端到端的 ML 工作流程：資料處理 → 訓練 → 評估 → 條件判斷達標才註冊模型。應使用？",
+      "options": [
+        "Amazon SageMaker Pipelines",
+        "Amazon SNS",
+        "AWS Shield",
+        "Amazon Route 53"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker Pipelines 定義 ML 工作流程的各步驟（處理、訓練、評估、條件、註冊模型），可重複執行並追蹤血緣。"
+    },
+    {
+      "n": 42,
+      "domain": 3,
+      "q": "團隊要讓程式碼推送到 Git 後，自動執行測試、建置容器映像並觸發模型訓練管線。應組合使用哪些服務？",
+      "options": [
+        "AWS CodePipeline 與 AWS CodeBuild",
+        "Amazon Polly 與 Amazon Lex",
+        "AWS Artifact 與 AWS Config",
+        "Amazon Macie 與 Amazon Inspector"
+      ],
+      "answer": 0,
+      "explanation": "CodePipeline 編排 CI/CD 流程，CodeBuild 執行測試與建置，可在階段中觸發 SageMaker Pipelines 執行訓練與部署。"
+    },
+    {
+      "n": 43,
+      "domain": 3,
+      "q": "一個即時端點白天流量高、夜間流量低。要依流量自動調整執行個體數量，應設定？",
+      "options": [
+        "端點的應用程式自動擴展（Application Auto Scaling），例如以每執行個體的呼叫次數為目標追蹤指標",
+        "固定使用最大數量的執行個體",
+        "改用批次轉換",
+        "在夜間手動刪除端點"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 端點可用 Application Auto Scaling，依 InvocationsPerInstance 等指標做目標追蹤擴展。"
+    },
+    {
+      "n": 44,
+      "domain": 3,
+      "q": "要把自訂的推論程式（含特殊相依套件）部署到 SageMaker，最常見的做法是？",
+      "options": [
+        "建立自訂容器映像並推送到 Amazon ECR，再用它建立模型與端點",
+        "把程式碼貼在 CloudFormation 中",
+        "把程式碼存成 S3 靜態網站",
+        "使用 AWS Artifact"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 使用容器執行推論，可擴充內建容器或自帶容器（BYOC），映像存放於 ECR。"
+    },
+    {
+      "n": 45,
+      "domain": 3,
+      "q": "一家公司要用基礎設施即程式碼的方式，重複建立 SageMaker 端點、IAM 角色和相關資源於多個環境。應使用？",
+      "options": [
+        "AWS CloudFormation 或 AWS CDK",
+        "在主控台手動點選",
+        "每次寫新的 Shell 腳本",
+        "Amazon Kendra"
+      ],
+      "answer": 0,
+      "explanation": "CloudFormation 與 CDK 以範本或程式碼定義資源，可在開發、測試、生產環境一致地重複部署。"
+    },
+    {
+      "n": 46,
+      "domain": 3,
+      "q": "一個 GenAI 應用需要依使用者問題決定要查知識庫、呼叫訂單 API，或直接回答，並能多步驟規劃。在 AWS 上應考慮？",
+      "options": [
+        "Amazon Bedrock Agents（或 AgentCore）搭配 action groups 與 Knowledge Bases",
+        "Amazon SQS FIFO",
+        "Amazon CloudFront",
+        "AWS Batch"
+      ],
+      "answer": 0,
+      "explanation": "Agent 能依推理決定呼叫哪些工具（API、知識庫），處理多步驟任務。Bedrock Agents 提供託管 agent；AgentCore 提供部署與運行 agent 的基礎元件。"
+    },
+    {
+      "n": 47,
+      "domain": 3,
+      "q": "要在邊緣裝置（例如工廠攝影機）上低延遲執行模型推論，且網路不穩定。應考慮？",
+      "options": [
+        "把模型最佳化後部署到邊緣裝置（例如使用 AWS IoT Greengrass）",
+        "每張影像都上傳到雲端即時端點",
+        "使用批次轉換",
+        "使用 Amazon Redshift"
+      ],
+      "answer": 0,
+      "explanation": "網路不穩、需低延遲時，在邊緣執行推論較合適。可先編譯/最佳化模型，再透過 IoT Greengrass 等部署與管理。"
+    },
+    {
+      "n": 48,
+      "domain": 3,
+      "q": "一個推論端點使用大型 GPU 執行個體，但 GPU 使用率很低。在維持延遲要求下降低成本，下列哪個做法最合理？",
+      "options": [
+        "使用 SageMaker Inference Recommender 評估並選擇合適的執行個體類型",
+        "改用更大的 GPU",
+        "增加執行個體數量",
+        "關閉自動擴展"
+      ],
+      "answer": 0,
+      "explanation": "Inference Recommender 對不同執行個體類型做負載測試，給出延遲、吞吐量與成本的建議，協助選出合適規格。"
+    },
+    {
+      "n": 49,
+      "domain": 3,
+      "q": "一個 ML 管線需要在每週一自動重新訓練模型。最簡單的排程方式是？",
+      "options": [
+        "使用 Amazon EventBridge 排程規則觸發 SageMaker Pipelines",
+        "每週一手動執行",
+        "使用 S3 生命週期規則",
+        "使用 Route 53 健康檢查"
+      ],
+      "answer": 0,
+      "explanation": "EventBridge 可依排程或事件觸發 SageMaker Pipelines 執行，實現定期重新訓練。"
+    },
+    {
+      "n": 50,
+      "domain": 3,
+      "q": "一個模型需要部署到 SageMaker 端點，團隊希望在推論前先做特徵前處理（例如正規化），推論後再做後處理，且三個步驟在同一個端點依序執行。應使用？",
+      "options": [
+        "推論管線（inference pipeline），在一個端點中串接多個容器",
+        "三個獨立的端點由用戶端依序呼叫",
+        "批次轉換",
+        "Amazon SQS"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 推論管線把 2 到 15 個容器串接在同一個端點中依序執行，例如前處理、預測、後處理，避免用戶端多次網路往返。"
+    },
+    {
+      "n": 51,
+      "domain": 4,
+      "q": "模型上線三個月後，預測準確度下降。調查發現輸入特徵的分佈與訓練時明顯不同。這稱為什麼？應用什麼服務偵測？",
+      "options": [
+        "資料漂移（data drift）；SageMaker Model Monitor",
+        "過擬合；SageMaker Debugger",
+        "資料洩漏；Amazon Macie",
+        "冷啟動；AWS Lambda"
+      ],
+      "answer": 0,
+      "explanation": "資料漂移是線上輸入分佈偏離訓練基準。SageMaker Model Monitor 可監控資料品質、模型品質、偏差漂移和特徵歸因漂移。"
+    },
+    {
+      "n": 52,
+      "domain": 4,
+      "q": "要讓 Model Monitor 監控線上端點的資料品質，第一步需要做什麼？",
+      "options": [
+        "在端點啟用資料擷取（data capture），並以訓練資料建立基準（baseline）",
+        "刪除訓練資料",
+        "關閉 CloudWatch",
+        "把端點改成批次轉換"
+      ],
+      "answer": 0,
+      "explanation": "Model Monitor 需要擷取端點的請求與回應，並從訓練資料建立統計與限制基準，再排程比較線上資料與基準。"
+    },
+    {
+      "n": 53,
+      "domain": 4,
+      "q": "模型上線後，某個特徵對預測的影響程度（特徵歸因）隨時間大幅改變。可以用哪個功能持續監控？",
+      "options": [
+        "SageMaker Clarify 搭配 Model Monitor 的特徵歸因漂移監控",
+        "AWS Budgets",
+        "Amazon Inspector",
+        "AWS Trusted Advisor"
+      ],
+      "answer": 0,
+      "explanation": "Clarify 與 Model Monitor 整合，可監控偏差漂移與特徵歸因漂移，在變化超出門檻時發出警示。"
+    },
+    {
+      "n": 54,
+      "domain": 4,
+      "q": "SageMaker 訓練作業需要存取 S3 中的訓練資料和寫入模型產出。最安全的授權方式是？",
+      "options": [
+        "為訓練作業指定一個只具有所需 S3 權限的 IAM 執行角色",
+        "把存取金鑰寫進訓練腳本",
+        "使用根使用者",
+        "把儲存貯體設為公開"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 作業以 IAM 執行角色取得臨時憑證，應依最小權限只授予所需的儲存貯體與動作。"
+    },
+    {
+      "n": 55,
+      "domain": 4,
+      "q": "一家公司要求 SageMaker 訓練作業不能存取網際網路，且只能透過私有網路存取 S3。應怎麼設定？",
+      "options": [
+        "在 VPC 中執行訓練作業並啟用網路隔離，透過 S3 VPC 端點存取資料",
+        "把訓練作業放在公有子網路",
+        "關閉加密",
+        "使用 NAT 閘道開放所有出站流量"
+      ],
+      "answer": 0,
+      "explanation": "把作業放在 VPC 私有子網路、啟用 network isolation，並建立 S3 閘道端點與所需的介面端點，即可避免網際網路存取。"
+    },
+    {
+      "n": 56,
+      "domain": 4,
+      "q": "要加密 SageMaker 訓練作業使用的儲存磁碟區和輸出的模型成品，並自行控制金鑰。應使用？",
+      "options": [
+        "AWS KMS 客戶受管金鑰，在作業中指定 VolumeKmsKeyId 與 OutputDataConfig 的 KmsKeyId",
+        "只用 HTTPS",
+        "把模型轉成 ZIP",
+        "AWS Shield"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 支援以 KMS 金鑰加密訓練磁碟區、輸出成品與端點儲存；客戶受管金鑰可控制金鑰政策並在 CloudTrail 稽核使用紀錄。"
+    },
+    {
+      "n": 57,
+      "domain": 4,
+      "q": "要監控 SageMaker 端點的延遲、錯誤數和呼叫次數，並在延遲過高時發出通知。應使用？",
+      "options": [
+        "Amazon CloudWatch 指標與警示",
+        "AWS Artifact",
+        "Amazon Macie",
+        "AWS Snowball"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 端點會把 ModelLatency、Invocations、4XX/5XX 錯誤等指標送到 CloudWatch，可設定警示並觸發通知或自動化。"
+    },
+    {
+      "n": 58,
+      "domain": 4,
+      "q": "一家公司想追蹤各個 ML 專案的 SageMaker 成本，並依團隊分攤費用。最直接的做法是？",
+      "options": [
+        "為資源加上成本分配標籤，並在 Cost Explorer 依標籤分析",
+        "每個團隊各開一張信用卡",
+        "關閉所有端點",
+        "只看總帳單"
+      ],
+      "answer": 0,
+      "explanation": "啟用成本分配標籤後，可在 Cost Explorer 和 AWS Budgets 依專案或團隊檢視與控管成本。"
+    },
+    {
+      "n": 59,
+      "domain": 4,
+      "q": "一個生成式 AI 應用在 Bedrock 上運行，公司要監控 token 用量、延遲與錯誤率，並記錄提示和回應以便稽核。應使用哪些功能？（選 2 個）",
+      "options": [
+        "Bedrock 在 CloudWatch 的執行階段指標",
+        "Bedrock 模型呼叫記錄（model invocation logging）",
+        "AWS Snowball",
+        "Amazon Route 53 Resolver",
+        "AWS Shield Standard"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "explanation": "Bedrock 會把呼叫次數、延遲、輸入/輸出 token 數等指標送到 CloudWatch；啟用模型呼叫記錄可把請求與回應內容寫入 S3 或 CloudWatch Logs。"
+    },
+    {
+      "n": 60,
+      "domain": 4,
+      "q": "要防止 GenAI 應用輸出個資和不當內容，並檢查回答是否根據檢索到的資料（降低幻覺），應使用？",
+      "options": [
+        "Amazon Bedrock Guardrails（敏感資訊過濾與 contextual grounding 檢查）",
+        "Amazon SageMaker Ground Truth",
+        "AWS Glue",
+        "Amazon EventBridge"
+      ],
+      "answer": 0,
+      "explanation": "Guardrails 可過濾有害內容、遮罩個資、阻擋禁止主題，並用 contextual grounding 檢查回答是否有依據且與問題相關。"
+    },
+    {
+      "n": 61,
+      "domain": 4,
+      "q": "模型監控發現品質下降並超過門檻。要自動觸發重新訓練管線，最合適的做法是？",
+      "options": [
+        "CloudWatch 警示觸發 EventBridge 規則，再啟動 SageMaker Pipelines",
+        "寄 Email 給團隊後手動處理",
+        "刪除端點",
+        "提高 temperature"
+      ],
+      "answer": 0,
+      "explanation": "以監控警示透過 EventBridge 觸發重新訓練管線，是常見的 MLOps 自動化模式；也可在管線中加入人工核准步驟。"
+    },
+    {
+      "n": 62,
+      "domain": 4,
+      "q": "一家公司需要稽核誰在什麼時候建立、刪除或更新了 SageMaker 端點。應查看？",
+      "options": [
+        "AWS CloudTrail",
+        "Amazon CloudWatch 指標",
+        "SageMaker Debugger",
+        "Amazon S3 Inventory"
+      ],
+      "answer": 0,
+      "explanation": "CloudTrail 記錄 SageMaker 管理 API 的呼叫，包括呼叫者、時間與參數，是稽核依據。"
+    },
+    {
+      "n": 63,
+      "domain": 4,
+      "q": "一個信用評分模型受金融法規監管，需要說明個別申請被拒的主要原因。應使用？",
+      "options": [
+        "SageMaker Clarify 的特徵歸因（SHAP 值）",
+        "SageMaker Neo",
+        "Amazon Polly",
+        "AWS DataSync"
+      ],
+      "answer": 0,
+      "explanation": "Clarify 以 SHAP 計算每筆預測的特徵歸因，可說明哪些特徵影響了個別決策，滿足可解釋性要求。"
+    },
+    {
+      "n": 64,
+      "domain": 4,
+      "q": "要限制資料科學家只能在指定的 VPC 中建立 SageMaker notebook 與訓練作業，且必須啟用加密。最適合的控制方式是？",
+      "options": [
+        "使用 IAM 政策條件鍵（例如 sagemaker:VpcSubnets、sagemaker:VolumeKmsKey）強制要求",
+        "在 Wiki 上寫規定",
+        "每週人工檢查",
+        "關閉 SageMaker"
+      ],
+      "answer": 0,
+      "explanation": "SageMaker 支援多個 IAM 條件鍵，可強制要求 VPC 設定、KMS 金鑰、網路隔離等，從權限層面防止不合規設定。"
+    },
+    {
+      "n": 65,
+      "domain": 4,
+      "q": "推論端點的 CPU 使用率長期低於 10%。要降低成本，下列哪個做法最合理？",
+      "options": [
+        "改用較小的執行個體類型、調整自動擴展最小值，或依流量改用無伺服器推論",
+        "增加執行個體數量",
+        "換成更大的 GPU",
+        "關閉監控"
+      ],
+      "answer": 0,
+      "explanation": "資源使用率長期偏低代表規格過大。可縮小規格、調整擴展設定、合併到多模型端點，或改用無伺服器推論。"
+    }
+  ]
+}
